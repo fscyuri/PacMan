@@ -72,9 +72,17 @@ def main():
     parede = carregaImagem("Recursos/Imagens/parede.png", (32, 32))
     pilula = carregaImagem("Recursos/Imagens/pilula.png", (32, 32))
     pacman = carregaImagem("Recursos/Imagens/pacman.png", (32, 32))
+    mozart = carregaImagem("Recursos/Imagens/mozart.png", (32, 32))
+    elvis = carregaImagem("Recursos/Imagens/elvis.png", (32, 32))
+
     xPacman = 384
     yPacman = 384
 
+    xMozart = 704
+    yMozart = 574
+
+    xElvis = 28
+    yElivs = 158
     background_song = carregaMusica("Recursos/Sons/Musicas/Long Gaze.mp3")
 
     while True:
@@ -102,6 +110,12 @@ def main():
 
         #Desenha o Pacman
         desenhaImagem(pacman, xPacman, yPacman)
+
+        #Desenha o Mozar
+        desenhaImagem(mozart, xMozart, yMozart)
+
+        #Desenha o Elvis
+        desenhaImagem(elvis, xElvis, yElivs)
 
         #Atualiza os objetos na janela
         atualizaTelaJogo()
