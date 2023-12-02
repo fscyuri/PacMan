@@ -6,11 +6,12 @@
 # Integrante 3: 
 # Integrante 4: 
 ######################################################
+import random
 
-
-#ATENÇÃO: você não pode importar o módulo PyGame neste arquivo. 
+#ATENÇÃO: você não pode importar o módulo PyGame neste arquivo.
 #Consequentemente, você não pode usar o métodos do módulo.
 #Você pode, se precisar, importar o módulo math e/ou random.
+
 from BaseParaJogo import *
 
 CORFUNDOJANELA = (0, 0, 0)
@@ -20,24 +21,24 @@ ICONE = "Recursos/Imagens/icone.png"
 
 MAPA = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],   
-[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+[1,0,0,0,1,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,1,0,0,0,1],
 [1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1],
-[1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1],
+[1,0,0,2,2,2,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1],
 [1,1,1,0,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,1,1,1],
 [1,0,0,0,0,0,1,0,1,1,1,1,0,1,1,1,1,0,1,0,0,0,0,0,1],
-[1,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,1],
-[1,0,0,0,0,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,0,0,0,0,1],
-[1,0,1,0,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,1],
-[1,0,1,0,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,0,1,0,1],
-[1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,2,1,1,1,0,1,0,0,2,2,2,2,2,0,0,0,0,1,0,1,1,1,0,1],
+[1,2,0,0,0,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,0,2,2,2,1],
+[1,2,1,0,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,1],
+[1,2,1,0,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,0,1,0,1],
+[1,2,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,1],
 [1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,1,0,0,0,1],
-[1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+[1,0,1,0,1,0,0,0,0,2,2,2,0,0,0,2,2,0,0,0,1,0,1,0,1],
 [1,1,1,0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1],
 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 [1,0,1,0,1,0,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,0,1,0,1],
-[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+[1,0,0,0,1,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,1,0,0,0,1],
 [1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1],
-[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+[1,0,0,0,1,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,1,0,0,0,1],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ]
 
@@ -63,22 +64,30 @@ def posicaoValida(x, y):
                 return False
     return True
 
-
-
-
 def main():
     criaJanela(LARGURAJANELA, ALTURAJANELA, "Pac-Man", CORFUNDOJANELA, ICONE)
 
     parede = carregaImagem("Recursos/Imagens/parede.png", (32, 32))
     pilula = carregaImagem("Recursos/Imagens/pilula.png", (32, 32))
-    pacman = carregaImagem("Recursos/Imagens/pacman.png", (32, 32))
+    pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman.png", (32, 32))
+    mozart = carregaImagem("Recursos/Imagens/Fantasmas/mozart.png", (32, 32))
+    elvis = carregaImagem("Recursos/Imagens/Fantasmas/elvis.png", (32, 32))
+    nota = carregaImagem("Recursos/Imagens/nota.png", (32, 32))
+
     xPacman = 384
     yPacman = 384
+    velocidade_pacman = 2
+
+    xMozart = 704
+    yMozart = 574
+
+    xElvis = 28
+    yElivs = 158
+    velocidade_fantasma = 4
 
     background_song = carregaMusica("Recursos/Sons/Musicas/Long Gaze.mp3")
 
     while True:
-
         if teclaPressionada(K_ESCAPE):
             break
 
@@ -87,21 +96,30 @@ def main():
 
         # Verifica se uma das teclas foi pressionada
         # Se sim, atualiza a posição do Pacman
-        if teclaPressionada(K_UP) and posicaoValida(xPacman, yPacman - 2):
+        if teclaPressionada(K_UP) and posicaoValida(xPacman, yPacman - velocidade_pacman):
+            pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_up.png", (32, 32))
             yPacman -= 2
-        elif teclaPressionada(K_DOWN) and posicaoValida(xPacman, yPacman + 2):
+        elif teclaPressionada(K_DOWN) and posicaoValida(xPacman, yPacman + velocidade_pacman):
+            pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_down.png", (32, 32))
             yPacman += 2
-        elif teclaPressionada(K_LEFT) and posicaoValida(xPacman - 2, yPacman):
+        elif teclaPressionada(K_LEFT) and posicaoValida(xPacman - velocidade_pacman, yPacman):
+            pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman.png", (32, 32))
             xPacman -= 2
-        elif teclaPressionada(K_RIGHT) and posicaoValida(xPacman + 2, yPacman):
+        elif teclaPressionada(K_RIGHT) and posicaoValida(xPacman + velocidade_pacman, yPacman):
+            pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_right.png", (32, 32))
             xPacman += 2
 
-
         #Desenha o mapa
-        desenhaMapa(parede, pilula)
+        desenhaMapa(parede, nota)
 
         #Desenha o Pacman
         desenhaImagem(pacman, xPacman, yPacman)
+
+        #Desenha o Mozart
+        desenhaImagem(mozart, xMozart, yMozart)
+
+        #Desenha o Elvis
+        desenhaImagem(elvis, xElvis, yElivs)
 
         #Atualiza os objetos na janela
         atualizaTelaJogo()
