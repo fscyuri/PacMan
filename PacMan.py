@@ -1,18 +1,6 @@
-######################################################
-# Introdução a Programação (2023/2)
-# EP2 - PacMan
-# Integrante 1:
-# Integrante 2:
-# Integrante 3: 
-# Integrante 4: 
-######################################################
-import random
-
-#ATENÇÃO: você não pode importar o módulo PyGame neste arquivo.
-#Consequentemente, você não pode usar o métodos do módulo.
-#Você pode, se precisar, importar o módulo math e/ou random.
-
+import pygame.mixer
 from BaseParaJogo import *
+import random
 
 CORFUNDOJANELA = (0, 0, 0)
 LARGURAJANELA = 800
@@ -42,14 +30,17 @@ MAPA = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ]
 
-def desenhaMapa(parede, pilula):
+def desenhaMapa(parede, pilula, pos_pacman):
     for l in range(len(MAPA)):
         for c in range(len(MAPA[l])):
             if MAPA[l][c] == 1:
                 desenhaImagem(parede, c*32, l*32)
             elif MAPA[l][c] == 2:
                 desenhaImagem(pilula, c*32, l*32)
-
+            elif MAPA[l][c] == 0: # Nota foi comida
+                continue
+            elif MAPA[l][c] == 9: # Posicao do pacman
+                continue
 def posicaoValida(x, y):
     # Converte as coordenadas para índices do mapa
     coluna_esquerda = x // 32
@@ -64,29 +55,48 @@ def posicaoValida(x, y):
                 return False
     return True
 
+def movimentoAleatorio(x, y, velocidade):
+    direcao = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
+    if direcao == K_UP and posicaoValida(x, y - velocidade):
+        y -= velocidade
+    elif direcao == K_DOWN and posicaoValida(x, y + velocidade):
+        y += velocidade
+    elif direcao == K_LEFT and posicaoValida(x - velocidade, y):
+        x -= velocidade
+    elif direcao == K_RIGHT and posicaoValida(x + velocidade, y):
+        x += velocidade
+    return x, y
+
 def main():
     criaJanela(LARGURAJANELA, ALTURAJANELA, "Pac-Man", CORFUNDOJANELA, ICONE)
 
     parede = carregaImagem("Recursos/Imagens/parede.png", (32, 32))
-    pilula = carregaImagem("Recursos/Imagens/pilula.png", (32, 32))
     pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman.png", (32, 32))
     mozart = carregaImagem("Recursos/Imagens/Fantasmas/mozart.png", (32, 32))
     elvis = carregaImagem("Recursos/Imagens/Fantasmas/elvis.png", (32, 32))
+
     nota = carregaImagem("Recursos/Imagens/nota.png", (32, 32))
+    qtd_notas = 10
 
     xPacman = 384
     yPacman = 384
     velocidade_pacman = 2
+    velocidade_fantasma = 2
 
-    xMozart = 704
-    yMozart = 574
+    xMozart = 256
+    yMozart = 256
 
-    xElvis = 28
-    yElivs = 158
-    velocidade_fantasma = 4
+    xElvis = 576
+    yElvis = 576
 
-    background_song = carregaMusica("Recursos/Sons/Musicas/Long Gaze.mp3")
+    som_A = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/A.mp3")
 
+    pygame.mixer.music.load("Recursos/Sons/Musicas/Long Gaze.mp3")
+    pygame.mixer.init()
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1)  # O argumento -1 faz com que a música seja reproduzida em um loop contínuo
+
+    pontuacao = 0
     while True:
         if teclaPressionada(K_ESCAPE):
             break
@@ -109,8 +119,27 @@ def main():
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_right.png", (32, 32))
             xPacman += 2
 
+        # Movimento aleatório de Mozart
+        xMozart, yMozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma)
+
+        # Movimento aleatório de Elvis
+        xElvis, yElvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma)
+
+        # Verifica se Mozart ou Elvis encontraram o Pacman
+        if (xPacman, yPacman) == (xMozart, yMozart) or (xPacman, yPacman) == (xElvis, yElvis):
+            print("Você perdeu! Mozart ou Elvis pegaram você.")
+            finalizaJogo()
+
+        # Verifica se o pacman encontrou uma nota musical
+        if MAPA[yPacman // 32][xPacman // 32] == 2:
+            pontuacao += 10  # Ajuste a pontuação conforme necessário
+            MAPA[yPacman // 32][xPacman // 32] = 0  # Remove a pílula do mapa
+            som_A.play()
+            if pontuacao == qtd_notas:
+                continue # PARA O JOGO E EXIBE MENSAGEM NA TELA QUE O USUARIO GANHOU
+
         #Desenha o mapa
-        desenhaMapa(parede, nota)
+        desenhaMapa(parede, nota, (xPacman, yPacman))
 
         #Desenha o Pacman
         desenhaImagem(pacman, xPacman, yPacman)
@@ -119,12 +148,14 @@ def main():
         desenhaImagem(mozart, xMozart, yMozart)
 
         #Desenha o Elvis
-        desenhaImagem(elvis, xElvis, yElivs)
+        desenhaImagem(elvis, xElvis, yElvis)
 
         #Atualiza os objetos na janela
         atualizaTelaJogo()
 
+        pygame.mixer.music.set_volume(0.3)
 
+    pygame.mixer.quit()
     finalizaJogo()
 
 
