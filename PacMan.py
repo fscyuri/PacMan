@@ -11,20 +11,20 @@ MAPA = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],   
 [1,0,0,0,1,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,1,0,0,0,1],
 [1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1],
-[1,0,0,2,2,2,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1],
+[1,0,0,2,2,2,0,0,1,0,0,0,1,0,0,0,1,0,2,2,2,2,0,0,1],
 [1,1,1,0,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,1,1,1],
-[1,0,0,0,0,0,1,0,1,1,1,1,0,1,1,1,1,0,1,0,0,0,0,0,1],
+[1,0,0,0,0,0,1,0,1,1,1,1,0,1,1,1,1,0,1,0,2,2,2,2,1],
 [1,2,1,1,1,0,1,0,0,2,2,2,2,2,0,0,0,0,1,0,1,1,1,0,1],
-[1,2,0,0,0,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,0,2,2,2,1],
-[1,2,1,0,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,1],
-[1,2,1,0,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,0,1,0,1],
-[1,2,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,1,0,0,0,1],
-[1,0,1,0,1,0,0,0,0,2,2,2,0,0,0,2,2,0,0,0,1,0,1,0,1],
-[1,1,1,0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1],
-[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,2,0,2,0,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,0,2,2,2,1],
+[1,2,1,2,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,1],
+[1,2,1,2,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,0,1,0,1],
+[1,2,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,2,1,0,1],
+[1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,1,2,0,0,1],
+[1,0,1,0,1,0,0,0,0,2,2,2,0,0,0,2,2,0,0,0,1,2,1,0,1],
+[1,1,1,0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,2,1,1,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,2,0,0,1],
 [1,0,1,0,1,0,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,0,1,0,1],
-[1,0,0,0,1,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,1,0,0,0,1],
+[1,0,0,0,1,0,2,2,2,0,0,0,0,0,2,2,2,2,0,0,1,0,0,0,1],
 [1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1],
 [1,0,0,0,1,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,1,0,0,0,1],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
@@ -76,11 +76,11 @@ def main():
     elvis = carregaImagem("Recursos/Imagens/Fantasmas/elvis.png", (32, 32))
 
     nota = carregaImagem("Recursos/Imagens/nota.png", (32, 32))
-    qtd_notas = 10
+    total_points = 580
 
     xPacman = 384
     yPacman = 384
-    velocidade_pacman = 2
+    velocidade_pacman = 4
     velocidade_fantasma = 2
 
     xMozart = 256
@@ -90,6 +90,7 @@ def main():
     yElvis = 576
 
     som_A = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/A.mp3")
+    som_morte = pygame.mixer.Sound("Recursos/Sons/pacman_death.wav")
 
     pygame.mixer.music.load("Recursos/Sons/Musicas/Long Gaze.mp3")
     pygame.mixer.init()
@@ -105,38 +106,47 @@ def main():
         limpaTela()
 
         # Verifica se uma das teclas foi pressionada
-        # Se sim, atualiza a posição do Pacman
         if teclaPressionada(K_UP) and posicaoValida(xPacman, yPacman - velocidade_pacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_up.png", (32, 32))
-            yPacman -= 2
+            yPacman -= 4
         elif teclaPressionada(K_DOWN) and posicaoValida(xPacman, yPacman + velocidade_pacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_down.png", (32, 32))
-            yPacman += 2
+            yPacman += 4
         elif teclaPressionada(K_LEFT) and posicaoValida(xPacman - velocidade_pacman, yPacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman.png", (32, 32))
-            xPacman -= 2
+            xPacman -= 4
         elif teclaPressionada(K_RIGHT) and posicaoValida(xPacman + velocidade_pacman, yPacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_right.png", (32, 32))
-            xPacman += 2
+            xPacman += 4
 
         # Movimento aleatório de Mozart
-        xMozart, yMozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma)
+        #xMozart, yMozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma)
 
         # Movimento aleatório de Elvis
-        xElvis, yElvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma)
+        #xElvis, yElvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma)
 
         # Verifica se Mozart ou Elvis encontraram o Pacman
         if (xPacman, yPacman) == (xMozart, yMozart) or (xPacman, yPacman) == (xElvis, yElvis):
-            print("Você perdeu! Mozart ou Elvis pegaram você.")
-            finalizaJogo()
+            som_morte.play()
+            pygame.time.delay(2000)
+            mensagem = "Você perdeu! Os fantasmas te pegaram."
+            desenhaTexto(mensagem, LARGURAJANELA // 2, ALTURAJANELA // 2, 40, pygame.Color("red"))
+            atualizaTelaJogo()
+            pygame.time.delay(5000)  # Aguarda 5 segundos antes de encerrar o jogo
+            break
 
         # Verifica se o pacman encontrou uma nota musical
         if MAPA[yPacman // 32][xPacman // 32] == 2:
             pontuacao += 10  # Ajuste a pontuação conforme necessário
             MAPA[yPacman // 32][xPacman // 32] = 0  # Remove a pílula do mapa
             som_A.play()
-            if pontuacao == qtd_notas:
-                continue # PARA O JOGO E EXIBE MENSAGEM NA TELA QUE O USUARIO GANHOU
+            if pontuacao == total_points:
+                msg = "Você ganhou!"
+                desenhaTexto(msg, LARGURAJANELA // 2, ALTURAJANELA // 2, 36, pygame.Color("blue"))
+                # Toca música final
+                pygame.time.delay(30000)
+                atualizaTelaJogo()
+                break
 
         #Desenha o mapa
         desenhaMapa(parede, nota, (xPacman, yPacman))
@@ -149,6 +159,10 @@ def main():
 
         #Desenha o Elvis
         desenhaImagem(elvis, xElvis, yElvis)
+
+        # Exibe pontuação atual
+        msg = f"Points: {pontuacao}"
+        desenhaTexto(msg, 50, 15, 24, pygame.Color("white"))
 
         #Atualiza os objetos na janela
         atualizaTelaJogo()
