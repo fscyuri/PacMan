@@ -80,7 +80,7 @@ def main():
 
     xPacman = 384
     yPacman = 384
-    velocidade_pacman = 4
+    velocidade_pacman = 2
     velocidade_fantasma = 2
 
     xMozart = 256
@@ -90,6 +90,13 @@ def main():
     yElvis = 576
 
     som_A = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/A.mp3")
+    som_B = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/B.mp3")
+    som_C = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/C.mp3")
+    som_D = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/D.mp3")
+    som_E = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/E.mp3")
+    som_F = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/F.mp3")
+    som_G = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/G.mp3")
+
     som_morte = pygame.mixer.Sound("Recursos/Sons/pacman_death.wav")
 
     pygame.mixer.music.load("Recursos/Sons/Musicas/Long Gaze.mp3")
@@ -98,6 +105,9 @@ def main():
     pygame.mixer.music.play(-1)  # O argumento -1 faz com que a música seja reproduzida em um loop contínuo
 
     pontuacao = 0
+    melodia1 = ['C', 'D', 'E', 'F', 'F', 'F', 'C', 'D', 'C', 'D', 'D', 'D',
+               'C', 'G', 'F', 'E', 'E', 'E', 'C', 'D', 'E', 'F', 'F', 'F']
+    melodia_index = 0
     while True:
         if teclaPressionada(K_ESCAPE):
             break
@@ -108,16 +118,16 @@ def main():
         # Verifica se uma das teclas foi pressionada
         if teclaPressionada(K_UP) and posicaoValida(xPacman, yPacman - velocidade_pacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_up.png", (32, 32))
-            yPacman -= 4
+            yPacman -= 2
         elif teclaPressionada(K_DOWN) and posicaoValida(xPacman, yPacman + velocidade_pacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_down.png", (32, 32))
-            yPacman += 4
+            yPacman += 2
         elif teclaPressionada(K_LEFT) and posicaoValida(xPacman - velocidade_pacman, yPacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman.png", (32, 32))
-            xPacman -= 4
+            xPacman -= 2
         elif teclaPressionada(K_RIGHT) and posicaoValida(xPacman + velocidade_pacman, yPacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_right.png", (32, 32))
-            xPacman += 4
+            xPacman += 2
 
         # Movimento aleatório de Mozart
         #xMozart, yMozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma)
@@ -137,15 +147,35 @@ def main():
 
         # Verifica se o pacman encontrou uma nota musical
         if MAPA[yPacman // 32][xPacman // 32] == 2:
-            pontuacao += 10  # Ajuste a pontuação conforme necessário
+            pontuacao += 10
             MAPA[yPacman // 32][xPacman // 32] = 0  # Remove a pílula do mapa
-            som_A.play()
+
+            # Toca o som correspondente à nota musical
+            nota_index = melodia1[melodia_index]
+            melodia_index = (melodia_index + 1) % len(melodia1)
+
+            # Toca o som correspondente à nota musical
+            if nota_index == 'A':
+                som_A.play()
+            elif nota_index == 'B':
+                som_B.play()
+            elif nota_index == 'C':
+                som_C.play()
+            elif nota_index == 'D':
+                som_D.play()
+            elif nota_index == 'E':
+                som_E.play()
+            elif nota_index == 'F':
+                som_F.play()
+            elif nota_index == 'G':
+                som_G.play()
+
             if pontuacao == total_points:
                 msg = "Você ganhou!"
                 desenhaTexto(msg, LARGURAJANELA // 2, ALTURAJANELA // 2, 36, pygame.Color("blue"))
                 # Toca música final
-                pygame.time.delay(30000)
                 atualizaTelaJogo()
+                pygame.time.delay(5000)
                 break
 
         #Desenha o mapa
