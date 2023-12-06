@@ -1,14 +1,3 @@
-# BaseParaJogo - Biblioteca de desenvolvimento de jogos baseado no PyGame
-# Copyright (C) 2023  Oberlan Romão
-"""
-BaseParaJogo é um conjunto de funções, baseado no PyGame, usado para o 
-desenvolvimento de jogos na disciplina de "Introdução à Programação", que
-segue o paradigma estruturado.  
-Por ser uma disciplina introdutória, o objetivo desta biblioteca é 
-facilitar a implementação de jogos pelos alunos, não sendo necessário 
-conhecimento de Orientação à Objetos.
-Para usar a biblioteca, certifique-se que o pygame está intalado.
-"""
 try:
     import pygame
     from pygame.locals import *
