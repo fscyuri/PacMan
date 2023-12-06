@@ -6,6 +6,8 @@ CORFUNDOJANELA = (0, 0, 0)
 LARGURAJANELA = 800
 ALTURAJANELA = 640
 ICONE = "Recursos/Imagens/icone.png"
+direcao_Elvis = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
+direcao_Mozart = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
 
 MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -59,17 +61,28 @@ def posicaoValida(x, y):
     return True
 
 
-def movimentoAleatorio(x, y, velocidade):
-    direcao = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
-    if direcao == K_UP and posicaoValida(x, y - velocidade):
-        y -= velocidade
-    elif direcao == K_DOWN and posicaoValida(x, y + velocidade):
-        y += velocidade
-    elif direcao == K_LEFT and posicaoValida(x - velocidade, y):
-        x -= velocidade
-    elif direcao == K_RIGHT and posicaoValida(x + velocidade, y):
-        x += velocidade
-    return x, y
+def movimentoAleatorio(x, y, velocidade, direcao):
+    if direcao == K_UP:
+        if posicaoValida(x, y - velocidade):
+            y -= velocidade
+        else:
+            direcao = random.choice([K_DOWN, K_LEFT, K_RIGHT])
+    elif direcao == K_DOWN:
+        if posicaoValida(x, y + velocidade):
+            y += velocidade
+        else:
+            direcao = random.choice([K_UP, K_LEFT, K_RIGHT])
+    elif direcao == K_LEFT:
+        if posicaoValida(x - velocidade, y):
+            x -= velocidade
+        else:
+            direcao = random.choice([K_UP, K_DOWN, K_RIGHT])
+    elif direcao == K_RIGHT:
+        if posicaoValida(x + velocidade, y):
+            x += velocidade
+        else:
+            direcao = random.choice([K_UP, K_DOWN, K_LEFT])
+    return x, y,direcao
 
 doremifa = ['C', 'D', 'E', 'F', 'F', 'F', 'C', 'D', 'C', 'D', 'D', 'D',
             'C', 'G', 'F', 'E', 'E', 'E', 'C', 'D', 'E', 'F', 'F', 'F']
@@ -148,7 +161,7 @@ def main():
     elvis = carregaImagem("Recursos/Imagens/Fantasmas/elvis.png", (32, 32))
 
     nota = carregaImagem("Recursos/Imagens/nota.png", (32, 32))
-    total_points = 50
+    total_points = 580
 
     xPacman = 384
     yPacman = 384
@@ -196,10 +209,11 @@ def main():
             xPacman += 2
 
         # Movimento aleatório de Mozart
-        # xMozart, yMozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma)
-
+        global direcao_Mozart
+        xMozart, yMozart,direcao_Mozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma,direcao_Mozart)
+        global direcao_Elvis
         # Movimento aleatório de Elvis
-        # xElvis, yElvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma)
+        xElvis, yElvis,direcao_Elvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma,direcao_Elvis)
 
         # Verifica se Mozart ou Elvis encontraram o Pacman
         if (xPacman, yPacman) == (xMozart, yMozart) or (xPacman, yPacman) == (xElvis, yElvis):
@@ -241,8 +255,8 @@ def main():
             if pontuacao == total_points:
                 msg = "Você ganhou!"
                 desenhaTexto(msg, LARGURAJANELA // 2, ALTURAJANELA // 2, 36, pygame.Color("blue"))
-                tocaMelodiaAutomaticamente(melodia_escolhida)
                 atualizaTelaJogo()
+                tocaMelodiaAutomaticamente(melodia_escolhida)
                 pygame.time.delay(5000)
                 break
 
