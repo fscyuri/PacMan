@@ -8,6 +8,9 @@ ALTURAJANELA = 640
 ICONE = "Recursos/Imagens/icone.png"
 direcao_Elvis = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
 direcao_Mozart = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
+direcao_freddie = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
+direcao_Amy = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
+
 
 MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -33,7 +36,7 @@ MAPA = [
 ]
 
 
-def desenhaMapa(parede, pilula, pos_pacman):
+def desenhaMapa(parede, pilula, posPacman):
     for l in range(len(MAPA)):
         for c in range(len(MAPA[l])):
             if MAPA[l][c] == 1:
@@ -83,6 +86,33 @@ def movimentoAleatorio(x, y, velocidade, direcao):
         else:
             direcao = random.choice([K_UP, K_DOWN, K_LEFT])
     return x, y,direcao
+
+def persegue(x_pacman,y_pacman,x,y,velocidade,nova_direcao):
+    if x_pacman < x:
+        nova_direcao = K_LEFT
+        if posicaoValida(x - velocidade, y):
+            x -= velocidade
+        else:
+            nova_direcao = random.choice([K_UP, K_DOWN, K_LEFT])
+    if x_pacman > x:
+        nova_direcao = K_RIGHT
+        if posicaoValida(x + velocidade, y):
+            x += velocidade
+        else:
+            nova_direcao = random.choice([K_UP, K_DOWN, K_LEFT])
+    if y_pacman < y:
+        nova_direcao = K_UP
+        if posicaoValida(x, y - velocidade):
+            y -= velocidade
+        else:
+            nova_direcao = random.choice([K_DOWN, K_LEFT, K_RIGHT])
+    if y_pacman > y:
+        nova_direcao = K_DOWN
+        if posicaoValida(x, y + velocidade):
+            y += velocidade
+        else:
+            nova_direcao = random.choice([K_UP, K_LEFT, K_RIGHT])
+    return x, y, nova_direcao
 
 doremifa = ['C', 'D', 'E', 'F', 'F', 'F', 'C', 'D', 'C', 'D', 'D', 'D',
             'C', 'G', 'F', 'E', 'E', 'E', 'C', 'D', 'E', 'F', 'F', 'F']
@@ -148,8 +178,8 @@ def tocaMelodiaAutomaticamente(melodia):
         elif nota == 'G':
             som_G.play()
 
-        # Delay between notes (adjust as needed)
-        pygame.time.delay(300)
+        # Delay entre notas
+        pygame.time.delay(600)
 
 
 def main():
@@ -159,8 +189,10 @@ def main():
     pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman.png", (32, 32))
     mozart = carregaImagem("Recursos/Imagens/Fantasmas/mozart.png", (32, 32))
     elvis = carregaImagem("Recursos/Imagens/Fantasmas/elvis.png", (32, 32))
-
+    freddie = carregaImagem("Recursos/Imagens/Fantasmas/freddie2.png", (32, 32))
+    amy = carregaImagem("Recursos/Imagens/Fantasmas/amy2.png", (32, 32))
     nota = carregaImagem("Recursos/Imagens/nota.png", (32, 32))
+
     total_points = 580
 
     xPacman = 384
@@ -174,17 +206,20 @@ def main():
     xElvis = 576
     yElvis = 576
 
-    som_morte = pygame.mixer.Sound("Recursos/Sons/pacman_death.wav")
+    xFreddie = 256
+    yFreddie = 384
 
+    xAmy = 544
+    yAmy = 32
+
+    som_morte = pygame.mixer.Sound("Recursos/Sons/pacman_death.wav")
     pygame.mixer.music.load("Recursos/Sons/Musicas/Long Gaze.mp3")
     pygame.mixer.init()
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)  # O argumento -1 faz com que a música seja reproduzida em um loop contínuo
 
     pontuacao = 0
-
     melodia_escolhida = selecionaMelodia()
-    #melodia_escolhida = random.choice(lista_melodias)
     melodia_index = 0
 
     while True:
@@ -195,6 +230,7 @@ def main():
         limpaTela()
 
         # Verifica se uma das teclas foi pressionada
+
         if teclaPressionada(K_UP) and posicaoValida(xPacman, yPacman - velocidade_pacman):
             pacman = carregaImagem("Recursos/Imagens/PacMan Icon/pacman_up.png", (32, 32))
             yPacman -= 2
@@ -211,19 +247,39 @@ def main():
         # Movimento aleatório de Mozart
         global direcao_Mozart
         xMozart, yMozart,direcao_Mozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma,direcao_Mozart)
+
         global direcao_Elvis
         # Movimento aleatório de Elvis
         xElvis, yElvis,direcao_Elvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma,direcao_Elvis)
 
+        global direcao_freddie
+        xFreddie, yFreddie,direcao_freddie = persegue(xPacman,yPacman,xFreddie,yFreddie,velocidade_fantasma,direcao_freddie)
+
+        global direcao_Amy
+        xAmy, yAmy,direcao_Amy = persegue(xPacman,yPacman,xAmy,yAmy,velocidade_fantasma,direcao_Amy)
+
+
         # Verifica se Mozart ou Elvis encontraram o Pacman
-        if (xPacman, yPacman) == (xMozart, yMozart) or (xPacman, yPacman) == (xElvis, yElvis):
+        if (xPacman, yPacman) == (xMozart, yMozart) or (xPacman, yPacman) == (xElvis, yElvis) or (xPacman, yPacman) == (xFreddie,yFreddie)or (xPacman, yPacman) == (xAmy,yAmy):
             som_morte.play()
             pygame.time.delay(2000)
             mensagem = "Você perdeu! Os fantasmas te pegaram."
             desenhaTexto(mensagem, LARGURAJANELA // 2, ALTURAJANELA // 2, 40, pygame.Color("red"))
             atualizaTelaJogo()
-            pygame.time.delay(5000)  # Aguarda 5 segundos antes de encerrar o jogo
-            break
+            pygame.time.delay(3000)
+            while True:
+                desenhaTexto("Deseja jogar novamente? (Pressione R para jogar novamente, ESC para sair)", LARGURAJANELA // 2, ALTURAJANELA // 2 + 50, 24, pygame.Color("white"))
+                atualizaTelaJogo()
+
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_r:
+                            # Reinicia o jogo
+                            main()
+                        elif event.key == pygame.K_ESCAPE:
+                            pygame.quit()
 
         # Verifica se o pacman encontrou uma nota musical
         if MAPA[yPacman // 32][xPacman // 32] == 2:
@@ -257,20 +313,27 @@ def main():
                 desenhaTexto(msg, LARGURAJANELA // 2, ALTURAJANELA // 2, 36, pygame.Color("blue"))
                 atualizaTelaJogo()
                 tocaMelodiaAutomaticamente(melodia_escolhida)
-                pygame.time.delay(5000)
-                break
+                pygame.time.delay(1000)
+                while True:
+                    desenhaTexto("Deseja jogar novamente? (Pressione R para jogar novamente, ESC para sair)", LARGURAJANELA // 2, ALTURAJANELA // 2 + 50, 24, pygame.Color("white"))
+                    atualizaTelaJogo()
 
-        # Desenha o mapa
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            pygame.quit()
+                        elif event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_r:
+                                # Reinicia o jogo
+                                main()
+                            elif event.key == pygame.K_ESCAPE:
+                                pygame.quit()
+
         desenhaMapa(parede, nota, (xPacman, yPacman))
-
-        # Desenha o Pacman
         desenhaImagem(pacman, xPacman, yPacman)
-
-        # Desenha o Mozart
         desenhaImagem(mozart, xMozart, yMozart)
-
-        # Desenha o Elvis
         desenhaImagem(elvis, xElvis, yElvis)
+        desenhaImagem(freddie,xFreddie,yFreddie)
+        desenhaImagem(amy,xAmy,yAmy)
 
         # Exibe pontuação atual
         msg = f"Points: {pontuacao}"
