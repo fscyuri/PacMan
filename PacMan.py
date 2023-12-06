@@ -8,39 +8,42 @@ ALTURAJANELA = 640
 ICONE = "Recursos/Imagens/icone.png"
 
 MAPA = [
-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],   
-[1,0,0,0,1,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,1,0,0,0,1],
-[1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1],
-[1,0,0,2,2,2,0,0,1,0,0,0,1,0,0,0,1,0,2,2,2,2,0,0,1],
-[1,1,1,0,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,1,1,1],
-[1,0,0,0,0,0,1,0,1,1,1,1,0,1,1,1,1,0,1,0,2,2,2,2,1],
-[1,2,1,1,1,0,1,0,0,2,2,2,2,2,0,0,0,0,1,0,1,1,1,0,1],
-[1,2,0,2,0,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,0,2,2,2,1],
-[1,2,1,2,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,1],
-[1,2,1,2,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,0,1,0,1],
-[1,2,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,2,1,0,1],
-[1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,0,1,1,0,1,2,0,0,1],
-[1,0,1,0,1,0,0,0,0,2,2,2,0,0,0,2,2,0,0,0,1,2,1,0,1],
-[1,1,1,0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,2,1,1,1],
-[1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,2,0,0,1],
-[1,0,1,0,1,0,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,0,1,0,1],
-[1,0,0,0,1,0,2,2,2,0,0,0,0,0,2,2,2,2,0,0,1,0,0,0,1],
-[1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1],
-[1,0,0,0,1,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,1,0,0,0,1],
-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 0, 2, 2, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 0, 1],
+    [1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 2, 2, 2, 2, 1],
+    [1, 2, 1, 1, 1, 0, 1, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1],
+    [1, 2, 0, 2, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 2, 2, 2, 1],
+    [1, 2, 1, 2, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+    [1, 2, 1, 2, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1],
+    [1, 2, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 2, 1, 0, 1],
+    [1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 2, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 0, 0, 0, 1, 2, 1, 0, 1],
+    [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 2, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 1, 0, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
+
 
 def desenhaMapa(parede, pilula, pos_pacman):
     for l in range(len(MAPA)):
         for c in range(len(MAPA[l])):
             if MAPA[l][c] == 1:
-                desenhaImagem(parede, c*32, l*32)
+                desenhaImagem(parede, c * 32, l * 32)
             elif MAPA[l][c] == 2:
-                desenhaImagem(pilula, c*32, l*32)
-            elif MAPA[l][c] == 0: # Nota foi comida
+                desenhaImagem(pilula, c * 32, l * 32)
+            elif MAPA[l][c] == 0:  # Nota foi comida
                 continue
-            elif MAPA[l][c] == 9: # Posicao do pacman
+            elif MAPA[l][c] == 9:  # Posicao do pacman
                 continue
+
+
 def posicaoValida(x, y):
     # Converte as coordenadas para índices do mapa
     coluna_esquerda = x // 32
@@ -55,6 +58,7 @@ def posicaoValida(x, y):
                 return False
     return True
 
+
 def movimentoAleatorio(x, y, velocidade):
     direcao = random.choice([K_UP, K_DOWN, K_LEFT, K_RIGHT])
     if direcao == K_UP and posicaoValida(x, y - velocidade):
@@ -67,6 +71,74 @@ def movimentoAleatorio(x, y, velocidade):
         x += velocidade
     return x, y
 
+doremifa = ['C', 'D', 'E', 'F', 'F', 'F', 'C', 'D', 'C', 'D', 'D', 'D',
+            'C', 'G', 'F', 'E', 'E', 'E', 'C', 'D', 'E', 'F', 'F', 'F']
+
+
+twinkle_twinkle = ['C', 'C', 'G', 'G', 'A', 'A', 'G',
+                   'F', 'F', 'E', 'E', 'D', 'D', 'C']
+
+happy_birthday = ['C', 'C', 'D', 'C', 'F', 'E', 'C', 'C', 'D',
+                  'C', 'G', 'F', 'C', 'C', 'C']
+
+jingle_bells = ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'G', 'C', 'D', 'E', 'F', 'F',
+                'F', 'F', 'F', 'E', 'E', 'E', 'E', 'D', 'D', 'E', 'D', 'G']
+
+lista_melodias = doremifa, twinkle_twinkle, happy_birthday, jingle_bells
+pygame.mixer.init()
+som_A = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/A.mp3")
+som_B = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/B.mp3")
+som_C = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/C.mp3")
+som_D = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/D.mp3")
+som_E = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/E.mp3")
+som_F = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/F.mp3")
+som_G = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/G.mp3")
+
+def selecionaMelodia():
+    # Display melody selection menu
+    desenhaTexto("ESCOLHA UMA MÚSICA:", LARGURAJANELA // 2, ALTURAJANELA // 2 - 50, 24, pygame.Color("white"))
+    desenhaTexto("1. Do Ré Mi Fa", LARGURAJANELA // 2, ALTURAJANELA // 2, 24, pygame.Color("white"))
+    desenhaTexto("2. Twinkle, Twinkle", LARGURAJANELA // 2, ALTURAJANELA // 2 + 30, 24, pygame.Color("white"))
+    desenhaTexto("3. Happy Birthday", LARGURAJANELA // 2, ALTURAJANELA // 2 + 60, 24, pygame.Color("white"))
+    desenhaTexto("4. Jingle Bells", LARGURAJANELA // 2, ALTURAJANELA // 2 + 90, 24, pygame.Color("white"))
+    atualizaTelaJogo()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                break
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    return lista_melodias[0]
+                elif event.key == pygame.K_2:
+                    return lista_melodias[1]
+                elif event.key == pygame.K_3:
+                    return lista_melodias[2]
+                elif event.key == pygame.K_4:
+                    return lista_melodias[3]
+
+def tocaMelodiaAutomaticamente(melodia):
+    for nota in melodia:
+        if nota == 'A':
+            som_A.play()
+        elif nota == 'B':
+            som_B.play()
+        elif nota == 'C':
+            som_C.play()
+        elif nota == 'D':
+            som_D.play()
+        elif nota == 'E':
+            som_E.play()
+        elif nota == 'F':
+            som_F.play()
+        elif nota == 'G':
+            som_G.play()
+
+        # Delay between notes (adjust as needed)
+        pygame.time.delay(300)
+
+
 def main():
     criaJanela(LARGURAJANELA, ALTURAJANELA, "Pac-Man", CORFUNDOJANELA, ICONE)
 
@@ -76,7 +148,7 @@ def main():
     elvis = carregaImagem("Recursos/Imagens/Fantasmas/elvis.png", (32, 32))
 
     nota = carregaImagem("Recursos/Imagens/nota.png", (32, 32))
-    total_points = 580
+    total_points = 50
 
     xPacman = 384
     yPacman = 384
@@ -89,14 +161,6 @@ def main():
     xElvis = 576
     yElvis = 576
 
-    som_A = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/A.mp3")
-    som_B = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/B.mp3")
-    som_C = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/C.mp3")
-    som_D = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/D.mp3")
-    som_E = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/E.mp3")
-    som_F = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/F.mp3")
-    som_G = pygame.mixer.Sound("Recursos/Sons/Notas Musicais/G.mp3")
-
     som_morte = pygame.mixer.Sound("Recursos/Sons/pacman_death.wav")
 
     pygame.mixer.music.load("Recursos/Sons/Musicas/Long Gaze.mp3")
@@ -105,14 +169,16 @@ def main():
     pygame.mixer.music.play(-1)  # O argumento -1 faz com que a música seja reproduzida em um loop contínuo
 
     pontuacao = 0
-    melodia1 = ['C', 'D', 'E', 'F', 'F', 'F', 'C', 'D', 'C', 'D', 'D', 'D',
-               'C', 'G', 'F', 'E', 'E', 'E', 'C', 'D', 'E', 'F', 'F', 'F']
+
+    melodia_escolhida = selecionaMelodia()
+    #melodia_escolhida = random.choice(lista_melodias)
     melodia_index = 0
+
     while True:
         if teclaPressionada(K_ESCAPE):
             break
 
-        #Limpa a janela
+        # Limpa a janela
         limpaTela()
 
         # Verifica se uma das teclas foi pressionada
@@ -130,10 +196,10 @@ def main():
             xPacman += 2
 
         # Movimento aleatório de Mozart
-        #xMozart, yMozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma)
+        # xMozart, yMozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma)
 
         # Movimento aleatório de Elvis
-        #xElvis, yElvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma)
+        # xElvis, yElvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma)
 
         # Verifica se Mozart ou Elvis encontraram o Pacman
         if (xPacman, yPacman) == (xMozart, yMozart) or (xPacman, yPacman) == (xElvis, yElvis):
@@ -151,8 +217,10 @@ def main():
             MAPA[yPacman // 32][xPacman // 32] = 0  # Remove a pílula do mapa
 
             # Toca o som correspondente à nota musical
-            nota_index = melodia1[melodia_index]
-            melodia_index = (melodia_index + 1) % len(melodia1)
+            melodia_atual = melodia_escolhida
+            nota_index = melodia_atual[melodia_index % len(melodia_atual)]
+
+            melodia_index = (melodia_index + 1) % len(melodia_escolhida)
 
             # Toca o som correspondente à nota musical
             if nota_index == 'A':
@@ -173,28 +241,28 @@ def main():
             if pontuacao == total_points:
                 msg = "Você ganhou!"
                 desenhaTexto(msg, LARGURAJANELA // 2, ALTURAJANELA // 2, 36, pygame.Color("blue"))
-                # Toca música final
+                tocaMelodiaAutomaticamente(melodia_escolhida)
                 atualizaTelaJogo()
                 pygame.time.delay(5000)
                 break
 
-        #Desenha o mapa
+        # Desenha o mapa
         desenhaMapa(parede, nota, (xPacman, yPacman))
 
-        #Desenha o Pacman
+        # Desenha o Pacman
         desenhaImagem(pacman, xPacman, yPacman)
 
-        #Desenha o Mozart
+        # Desenha o Mozart
         desenhaImagem(mozart, xMozart, yMozart)
 
-        #Desenha o Elvis
+        # Desenha o Elvis
         desenhaImagem(elvis, xElvis, yElvis)
 
         # Exibe pontuação atual
         msg = f"Points: {pontuacao}"
         desenhaTexto(msg, 50, 15, 24, pygame.Color("white"))
 
-        #Atualiza os objetos na janela
+        # Atualiza os objetos na janela
         atualizaTelaJogo()
 
         pygame.mixer.music.set_volume(0.3)
@@ -204,4 +272,3 @@ def main():
 
 
 main()
-
