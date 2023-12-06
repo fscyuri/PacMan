@@ -67,22 +67,22 @@ def posicaoValida(x, y):
 def movimentoAleatorio(x, y, velocidade, direcao):
     if direcao == K_UP:
         if posicaoValida(x, y - velocidade):
-            y -= velocidade
+            y -= 2
         else:
             direcao = random.choice([K_DOWN, K_LEFT, K_RIGHT])
     elif direcao == K_DOWN:
         if posicaoValida(x, y + velocidade):
-            y += velocidade
+            y += 2
         else:
             direcao = random.choice([K_UP, K_LEFT, K_RIGHT])
     elif direcao == K_LEFT:
         if posicaoValida(x - velocidade, y):
-            x -= velocidade
+            x -= 2
         else:
             direcao = random.choice([K_UP, K_DOWN, K_RIGHT])
     elif direcao == K_RIGHT:
         if posicaoValida(x + velocidade, y):
-            x += velocidade
+            x += 2
         else:
             direcao = random.choice([K_UP, K_DOWN, K_LEFT])
     return x, y,direcao
@@ -248,19 +248,21 @@ def main():
         global direcao_Mozart
         xMozart, yMozart,direcao_Mozart = movimentoAleatorio(xMozart, yMozart, velocidade_fantasma,direcao_Mozart)
 
-        global direcao_Elvis
         # Movimento aleatório de Elvis
+        global direcao_Elvis
         xElvis, yElvis,direcao_Elvis = movimentoAleatorio(xElvis, yElvis, velocidade_fantasma,direcao_Elvis)
 
+        # Movimento aleatório de Freedie
         global direcao_freddie
         xFreddie, yFreddie,direcao_freddie = persegue(xPacman,yPacman,xFreddie,yFreddie,velocidade_fantasma,direcao_freddie)
 
+        # Movimento aleatório de Amy
         global direcao_Amy
         xAmy, yAmy,direcao_Amy = persegue(xPacman,yPacman,xAmy,yAmy,velocidade_fantasma,direcao_Amy)
 
 
         # Verifica se Mozart ou Elvis encontraram o Pacman
-        if (xPacman, yPacman) == (xMozart, yMozart) or (xPacman, yPacman) == (xElvis, yElvis) or (xPacman, yPacman) == (xFreddie,yFreddie)or (xPacman, yPacman) == (xAmy,yAmy):
+        if (xPacman, yPacman) == (xMozart, yMozart) or (xPacman, yPacman) == (xElvis, yElvis) or (xPacman, yPacman) == (xFreddie,yFreddie) or (xPacman, yPacman) == (xAmy,yAmy):
             som_morte.play()
             pygame.time.delay(2000)
             mensagem = "Você perdeu! Os fantasmas te pegaram."
